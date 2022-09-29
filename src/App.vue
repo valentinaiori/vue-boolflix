@@ -1,74 +1,29 @@
 <template>
   <div id="app">
-    <div>
-    <input type="text" v-model="query"/> <button @click="search">Cerca</button>
-</div>
-<div class="container-card">
-    <div class="card" v-for="movie in movies" :key="movie.id">
-      <p>Title: {{ movie.title }}</p>
-      <p> Original title: {{ movie.original_title }}</p>
-      <p> Language: 
-        <img class="flag" :src="getFlag(movie.original_language)"
-        :alt="movie.original_language">
-        {{ movie.original_language }}
-        </p>
-      <p> Vote: {{ movie.vote_average }}</p>
-    </div>
-</div>
+    <HeaderComponent />
+    <MainComponent />
   </div>
 </template>
 
 <script>
-
-import axios from 'axios';
-import {apiKey} from '@/env';
+import HeaderComponent from './components/HeaderComponent.vue';
+import MainComponent from './components/MainComponent.vue';
 
 
 export default {
-  name: 'App',
-
-  data(){
-    return{
-      query: '',
-      movies: [],
-    }
+  name: "App",
+  components: {
+    HeaderComponent,
+    MainComponent
   },
-
-  methods: {
-    search(){
-      this.queryApi(this.query)
-    }, 
-
-    queryApi(textToSearch){
-      axios.get( `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${textToSearch}&language=it-IT`)
-      .then((response)=>{
-        console.log(response);
-        if( response.status === 200){
-          this.movies = response.data.results;
-        }
-      })
-    }, 
-
-    getFlag(country){
-      if(country === 'en'){
-        country = 'gb';
-      }
-      return `https://flagicons.lipis.dev/flags/1x1/${country}.svg`
-
-    }
-      
-    }
-  }
+}
 
 </script>
 
 <style lang="scss">
-  .card{
-    border: 1px solid black;
-  }
-
-  .flag{
-    max-width: 20px;
-  }
-
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>
