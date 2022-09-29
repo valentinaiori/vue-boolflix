@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <div>
-    <input type="text" v-model="query"> <button @click="search">Cerca</button>
+    <input type="text" v-model="query"/> <button @click="search">Cerca</button>
 </div>
 <div class="container-card">
     <div class="card" v-for="movie in movies" :key="movie.id">
       <p>Title: {{ movie.title }}</p>
       <p> Original title: {{ movie.original_title }}</p>
-      <p> Language: {{ movie.original_language }}</p>
+      <p> Language: 
+        <img class="flag" :src="getFlag(movie.original_language)"
+        :alt="movie.original_language">
+        {{ movie.original_language }}
+        </p>
       <p> Vote: {{ movie.vote_average }}</p>
     </div>
 </div>
   </div>
-  
 </template>
 
 <script>
@@ -24,18 +27,13 @@ import {apiKey} from '@/env';
 export default {
   name: 'App',
 
-
   data(){
     return{
       query: '',
       movies: [],
     }
-
   },
-  mounted(){
-    this.queryApi('ritorno al fut')
 
-  }, 
   methods: {
     search(){
       this.queryApi(this.query)
@@ -49,12 +47,28 @@ export default {
           this.movies = response.data.results;
         }
       })
+    }, 
+
+    getFlag(country){
+      if(country === 'en'){
+        country = 'gb';
+      }
+      return `https://flagicons.lipis.dev/flags/1x1/${country}.svg`
+
+    }
+      
     }
   }
 
-}
 </script>
 
-<style>
+<style lang="scss">
+  .card{
+    border: 1px solid black;
+  }
+
+  .flag{
+    max-width: 20px;
+  }
 
 </style>
