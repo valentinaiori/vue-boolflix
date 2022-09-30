@@ -1,5 +1,6 @@
 <template>
     <div class="container-card">
+        <h1>MOVIES</h1>
         <div class="card" v-for="movie in movies" :key="movie.id">
             <p>Title: {{ movie.title }}</p>
             <p> Original title: {{ movie.original_title }}</p>
@@ -8,6 +9,10 @@
                 {{ movie.original_language }}
             </p>
             <p> Vote: {{ movie.vote_average }}</p>
+            <PosterPathComponent
+            :image="movie.poster_path"
+            alt="movie.title"
+            />
         </div>
     </div>
 
@@ -15,8 +20,13 @@
 </template>
 
 <script>
+import PosterPathComponent from './PosterPathComponent.vue'
+
 export default {
     name: 'FilmContainerComponent',
+    components:{
+        PosterPathComponent
+    },
     props: {
         movies: Array
     },
@@ -29,6 +39,10 @@ export default {
                 }
                 case 'ja': {
                     country = "jp";
+                    break;
+                }
+                case 'zh': {
+                    country = "cn";
                     break;
                 }
 
