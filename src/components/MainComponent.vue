@@ -1,12 +1,8 @@
 <template>
     <main>
-        <div>
-            <input type="text" v-model="query" /> 
-            <button @click="search">Cerca</button>
-        </div>
-
+        <HeaderMainComponent @settedQueryEvent="runSearch"/>
         <FilmContainerComponent :movies="this.movies" />
-        <SeriesContainerComponent :series="this.series"/>
+        <SeriesContainerComponent :series="this.series" />
 
     </main>
 
@@ -17,27 +13,33 @@
 <script>
 import axios from 'axios';
 import { apiKey } from '@/env';
+import HeaderMainComponent from '@/components/HeaderMainComponent.vue';
 import FilmContainerComponent from './FilmContainerComponent.vue';
 import SeriesContainerComponent from './SeriesContainerComponent.vue';
 
 export default {
     name: 'MainComponent',
     components: {
-    FilmContainerComponent,
-    SeriesContainerComponent,
-},
+        HeaderMainComponent,
+        FilmContainerComponent,
+        SeriesContainerComponent,
+    },
 
     data() {
         return {
-            query: "",
             movies: [],
             series: [],
         };
     },
     methods: {
-        search() {
-            this.queryApiFilm(this.query);
-            this.queryApiSeries(this.query);
+        search(queryFromEvent) {
+            this.queryApiFilm(queryFromEvent);
+            this.queryApiSeries(queryFromEvent);
+        },
+
+        runSearch(queryFromEvent){
+            console.log('setQuery',queryFromEvent)
+            this.search(queryFromEvent)
         },
 
         queryApiFilm(textToSearch) {
@@ -56,7 +58,7 @@ export default {
                     console.log(response);
                     if (response.status === 200) {
                         this.series = response.data.results;
-                        
+
                     }
                 });
         },
@@ -66,5 +68,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
+
 </style>
