@@ -6,6 +6,7 @@
         </div>
 
         <FilmContainerComponent :movies="[...this.movies, ...this.series]" />
+        <SeriesContainerComponent :series="[...this.movies, ...this.series]"/>
 
     </main>
 
@@ -17,12 +18,14 @@
 import axios from 'axios';
 import { apiKey } from '@/env';
 import FilmContainerComponent from './FilmContainerComponent.vue';
+import SeriesContainerComponent from './SeriesContainerComponent.vue';
 
 export default {
     name: 'MainComponent',
     components: {
-        FilmContainerComponent
-    },
+    FilmContainerComponent,
+    SeriesContainerComponent,
+},
 
     data() {
         return {
@@ -63,5 +66,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped> 
 </style>
