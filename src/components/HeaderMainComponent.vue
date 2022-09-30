@@ -36,13 +36,13 @@ export default {
     header{
         background-color: black;
         height: 100px;
+        display: flex;
+        align-items: center;
     }
 
     h1{
         color: red;
         font-size: 2.0rem;
-        padding-top: 30px;
-        padding-left: 30px;
     }
 
 
