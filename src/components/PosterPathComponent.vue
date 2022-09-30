@@ -1,5 +1,5 @@
 <template>
-  <img class="poster" :src="getImageUrl" alt="">
+  <img class="poster" :src="getImageUrl" alt="alt">
 </template>
 
 <script>
@@ -8,6 +8,7 @@ export default {
     props:{
         image: String,
         width: Number,
+        alt: String
     },
 
     computed:{
@@ -22,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
     .poster{
-    max-width: 250px;
+    max-width: 240px;
 }
 
 </style>
