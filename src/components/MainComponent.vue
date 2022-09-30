@@ -5,8 +5,8 @@
             <button @click="search">Cerca</button>
         </div>
 
-        <FilmContainerComponent :movies="[...this.movies, ...this.series]" />
-        <SeriesContainerComponent :series="[...this.movies, ...this.series]"/>
+        <FilmContainerComponent :movies="this.movies" />
+        <SeriesContainerComponent :series="this.series"/>
 
     </main>
 
