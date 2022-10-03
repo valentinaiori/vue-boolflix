@@ -1,8 +1,11 @@
 <template>
     <div>
         <h1>MOVIES</h1>
-        <div class="container-card">
+        <div class="card-container">
             <div class="card" v-for="movie in movies" :key="movie.id">
+                <div class="poster-path">
+                    <PosterPathComponent :image="movie.poster_path" alt="movie.title" />
+                </div>
                 <p>Title: {{ movie.title }}</p>
                 <p> Original title: {{ movie.original_title }}</p>
                 <p> Language:
@@ -10,7 +13,6 @@
                     {{ movie.original_language }}
                 </p>
                 <StarsRatingComponent :vote="movie.vote_average"/>
-                <PosterPathComponent :image="movie.poster_path" alt="movie.title" />
             </div>
         </div>
     </div>
@@ -55,18 +57,44 @@ export default {
 
 <style lang="scss" scoped>
 
-.container-card {
+.card-container{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    >*{
+        flex-shrink: 0;
+    }
 }
 
 .card {
     border: 1px solid black;
-    width: 251px;
-    height: 455px;
+    position: relative;
+    height: 360px;
+    width: 242px;
     margin-bottom: 50px;
-    flex-direction: row;
-    width: calc(100% / 5);
+    margin-right: 20px;
+
+
+    img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .long-text{
+        max-height: 150px;
+        overflow-y: auto;
+    }
+}
+
+.poster-path{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.card:hover .poster-path{
+    display: none;
 }
 
 .flag {

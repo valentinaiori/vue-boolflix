@@ -14,12 +14,9 @@
             </p>
             <StarsRatingComponent :vote="serie.vote_average"/>
             <p class="long-text"> {{ serie.overview}} </p>
-            
         </div>
-
     </div>
 </div>
-
 </template>
 
 <script>
@@ -101,7 +98,6 @@ export default {
 .card:hover .poster-path{
     display: none;
 }
-
 
 .flag {
     max-width: 20px;
