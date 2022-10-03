@@ -69,6 +69,7 @@ export default {
 .info{
     padding-top: 15px;
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 .card {

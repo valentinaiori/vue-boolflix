@@ -2,7 +2,7 @@
     <main>
         <HeaderMainComponent @settedQueryEvent="runSearch" />
         <div class="container">
-            <h1>Film</h1>
+            <h1 v-if="movies.length > 0">Film</h1>
             <div class="card-container">
                 <CardComponent v-for="movie in movies" :key="movie.id" 
                     :title="movie.title"
@@ -13,7 +13,7 @@
                     :overview="movie.overview" />
             </div>
 
-            <h1>Serie TV</h1>
+            <h1 v-if="series.length > 0">Serie TV</h1>
             <div class="card-container">
                 <CardComponent v-for="serie in series" :key="serie.id" 
                     :title="serie.name"
@@ -86,13 +86,14 @@ export default {
 <style lang="scss" scoped>
 main {
     background-color: #505050;
+
 }
 
 h1 {
     margin-top: 30px;
     margin-bottom: 30px;
-    color: white;
     padding-left: 10px;
+    color: black;
 }
 
 .card-container {
