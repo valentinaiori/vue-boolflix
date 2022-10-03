@@ -13,7 +13,6 @@
                 <PosterPathComponent :image="movie.poster_path" alt="movie.title" />
             </div>
         </div>
-
     </div>
 </template>
 

@@ -1,17 +1,20 @@
 <template>
     <div>
         <h1>SERIES TV</h1>
-    <div class="container-card">
+    <div class="card-container">
         <div class="card" v-for="serie in series" :key="serie.id">
+            <div class="poster-path">
+                <PosterPathComponent :image="serie.poster_path" alt="serie.title"/>
+            </div>
             <p>Name: {{ serie.name }}</p>
             <p>Original name: {{ serie.original_name }}</p>
             <p>Language:
                 <img class="flag" :src="getFlag(serie.original_language)" :alt="serie.original_language">
                 {{ serie.original_language }}
             </p>
-            <p> Vote:{{ serie.vote_average }}</p>
+            <StarsRatingComponent :vote="serie.vote_average"/>
+            <p class="long-text"> {{ serie.overview}} </p>
             
-            <PosterPathComponent :image="serie.poster_path" alt="serie.title" />
         </div>
 
     </div>
@@ -21,11 +24,13 @@
 
 <script>
 import PosterPathComponent from './PosterPathComponent.vue';
+import StarsRatingComponent from './StarsRatingComponent.vue'
 
 export default {
     name: 'SeriesContainerComponent',
     components: {
         PosterPathComponent,
+        StarsRatingComponent
     },
     props: {
         series: Array
@@ -57,18 +62,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container-card {
+.card-container{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    >*{
+        flex-shrink: 0;
+    }
 }
 
 .card {
     border: 1px solid black;
-    width: 251px;
-    height: 455px;
+    position: relative;
+    height: 360px;
+    width: 242px;
     margin-bottom: 50px;
-    flex-direction: row;
-    width: calc(100% / 5);
+    margin-right: 20px;
+
+
+    img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .long-text{
+        max-height: 150px;
+        overflow-y: auto;
+    }
+}
+
+.poster-path{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.card:hover .poster-path{
+    display: none;
 }
 
 
