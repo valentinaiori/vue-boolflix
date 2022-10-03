@@ -1,10 +1,8 @@
 <template>
     <header>
+        <h1>BOOLFLIX</h1>
         <div>
-            <h1>BOOLFLIX</h1>
-        </div>
-        <div>
-            <input type="text" v-model="userQuery" /> 
+            <input type="text" v-model="userQuery" @keyup.enter="changeUserQuery"/> 
             <button @click="changeUserQuery">Cerca</button>
         </div>  
     </header>
@@ -34,10 +32,11 @@ export default {
 <style lang="scss" scoped>
 
     header{
-        background-color: black;
-        height: 100px;
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        background-color: black;
+        height: 70px;
     }
 
     h1{

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <font-awesome-icon v-for="index in max" :key="index" 
+    <font-awesome-icon class="icon-star" v-for="index in max" :key="index" 
         :icon="[
             index <= stars ? 'fa-solid' : 'fa-regular',
             'fa-star'
@@ -31,5 +31,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .icon-star{
+        color: #ffc40c;
+    }
 
 </style>
