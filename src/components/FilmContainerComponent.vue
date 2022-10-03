@@ -9,7 +9,7 @@
                     <img class="flag" :src="getFlag(movie.original_language)" :alt="movie.original_language">
                     {{ movie.original_language }}
                 </p>
-                <p> Vote: {{ movie.vote_average }}</p>
+                <StarsRatingComponent :vote="movie.vote_average"/>
                 <PosterPathComponent :image="movie.poster_path" alt="movie.title" />
             </div>
         </div>
@@ -19,11 +19,13 @@
 
 <script>
 import PosterPathComponent from './PosterPathComponent.vue'
+import StarsRatingComponent from './StarsRatingComponent.vue'
 
 export default {
     name: 'FilmContainerComponent', 
     components: {
-        PosterPathComponent
+        PosterPathComponent,
+        StarsRatingComponent
     },
     props: {
         movies: Array
@@ -48,13 +50,6 @@ export default {
             return `https://flagicons.lipis.dev/flags/1x1/${country}.svg`;
         }, 
 
-        getIntegerVote(n){
-            let vote = Math.floor(n/2)
-            if(vote === 0){
-                vote = 1
-            }
-           return vote
-        } 
     }
 }
 </script>
